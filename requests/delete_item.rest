@@ -1,1 +1,2 @@
-delete http://localhost:3001/api/items/5e0fc1fc66f0d83850c49fd5
+delete http://localhost:3001/api/items/5e15fb38c38e3036408a1381
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMTRjYjExNjYyZjYyMDE2NDBhYWE5MSIsImlhdCI6MTU3ODQ5ODI5M30.mAH1BpyBdDGNfPR6nqIok9r5wiMszRgpdPE2IEljvW4

@@ -1,6 +1,7 @@
 post http://localhost:3001/api/items
 Content-Type: application/json
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlMTRjYjExNjYyZjYyMDE2NDBhYWE5MSIsImlhdCI6MTU3ODQ5ODI5M30.mAH1BpyBdDGNfPR6nqIok9r5wiMszRgpdPE2IEljvW4
 
 {
-  "name": "Eggs"
+  "name": "Beef"
 }

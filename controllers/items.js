@@ -1,5 +1,6 @@
 const itemsRouter = require('express').Router()
 const Item = require('../models/item')
+const middleware = require('../utils/middleware')
 
 //@route GET api/items
 //@desc get all items
@@ -12,8 +13,8 @@ itemsRouter.get('/', async (req, res) => {
 
 //@route POST api/items
 //@desc create an item
-//@access public
-itemsRouter.post('/', async (req, res) => {
+//@access private
+itemsRouter.post('/', middleware.auth, async (req, res) => {
   const newItem = await new Item({
     name: req.body.name
   })
@@ -23,13 +24,12 @@ itemsRouter.post('/', async (req, res) => {
 
 //@route DELETE api/items/:id
 //@desc delete an item
-//@access public
-itemsRouter.delete('/:id', async (req, res) => {
+//@access private
+itemsRouter.delete('/:id', middleware.auth, async (req, res) => {
   Item.findById(req.params.id)
     .then(item => item.remove())
     .then(() => res.json({ success: true }))
     .catch(err => res.status(404).json({ success: false }))
 })
-
 
 module.exports = itemsRouter
