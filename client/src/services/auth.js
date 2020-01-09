@@ -14,6 +14,7 @@ const destroyToken = () => {
 const loadUser = () => {
   const config = {
     headers: {
+      'Content-type': 'application/json',
       'X-Auth-Token': token
     }
   }
