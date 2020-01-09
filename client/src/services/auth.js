@@ -22,8 +22,14 @@ const loadUser = () => {
   return request.then(response => response.data)
 }
 
+const login = credentials => {
+  const request = axios.post(baseURL, credentials)
+  return request.then(response => response.data)
+}
+
 export default {
   setToken,
   destroyToken,
-  loadUser
+  loadUser,
+  login
 }

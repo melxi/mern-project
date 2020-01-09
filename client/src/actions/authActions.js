@@ -34,6 +34,30 @@ export const loadUser = () => async (dispatch, getState) => {
   }
 }
 
+// Login user with email & password
+export const loginUser = ({ email, password }) => async dispatch => {
+  try {
+    const user = await authService.login({ email, password })
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: user
+    })
+  } catch (exception) {
+    dispatch(
+      returnErrors(
+        exception.response.data,
+        exception.response.status,
+        'LOGIN_FAIL'
+      )
+    )
+    dispatch({
+      type: LOGIN_FAIL
+    })
+  }
+}
+
+// Register a new user
 export const registerUser = ({ name, email, password }) => async dispatch => {
   try {
     const newUser = await userService.register({ name, email, password })

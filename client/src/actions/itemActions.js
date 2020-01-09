@@ -1,4 +1,5 @@
 import itemService from '../services/items'
+import { returnErrors } from './errorActions'
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types'
 
 export const getItems = () => async dispatch => {
@@ -10,20 +11,30 @@ export const getItems = () => async dispatch => {
   })
 }
 
-export const addItem = item => async dispatch => {
-  const newItem = await itemService.create(item)
-  dispatch({
-    type: ADD_ITEM,
-    payload: newItem
-  })
+export const addItem = item => async (dispatch, getState) => {
+  try {
+    const token = getState().auth.token
+    const newItem = await itemService.create(item, token)
+    dispatch({
+      type: ADD_ITEM,
+      payload: newItem
+    })
+  } catch (exception) {
+    dispatch(returnErrors(exception.response.data, exception.response.status))
+  }
 }
 
-export const deleteItem = id => async dispatch => {
-  await itemService.remove(id)
-  dispatch({
-    type: DELETE_ITEM,
-    payload: id
-  })
+export const deleteItem = id => async (dispatch, getState) => {
+  try {
+    const token = getState().auth.token
+    await itemService.remove(id, token)
+    dispatch({
+      type: DELETE_ITEM,
+      payload: id
+    })
+  } catch (exception) {
+    dispatch(returnErrors(exception.response.data, exception.response.status))
+  }
 }
 
 export const setItemsLoading = () => {
